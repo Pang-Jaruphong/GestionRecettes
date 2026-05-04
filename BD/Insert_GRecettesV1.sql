@@ -2,7 +2,7 @@ USE `GestionRecettes` ;
 
 -- 1. Insertion de l'administrateur
 INSERT INTO `users` (`name`, `mail`, `password`, `firstCon`) 
-VALUES ('Jaruphong', 'jaruphong.plancherel@eduvaud.ch', '$2y$10$YourHashedPasswordHere', 1);
+VALUES ('Jaruphong', 'jaruphong.plancherel@eduvaud.ch', NULL, 1);
 
 -- 2. Insertion des catégories
 INSERT INTO `categories` (`name`) VALUES ('Entrées'), ('Plats Principaux'), ('Desserts');
