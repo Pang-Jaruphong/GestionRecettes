@@ -39,20 +39,21 @@ authRouter.post('/login', async (req, res) => {
         }
 
         // logique first connexion
+        // Aider par Gemini
         if (user.firstCon === 1) {
 
             try {
-                // 1. Générer un token sécurisé
+                // Generage a token security
                 const resetToken = jsonwebtoken.sign(
                     {id: user.id, purpose: 'first_setup'},
                     process.env.JWT_SECRET,
                     {expiresIn: '1h'}
                 );
 
-                // 2. Préparer le lien (pour ton frontend ou test)
-                const resetLink = `http://localhost:5000/resetPassword?token=${resetToken}`;
+                // Prepare lien for frontend
+                const resetLink = `http://localhost:5000/setupPassword?token=${resetToken}`;
 
-                // 3. Envoyer l'email réellement
+                // Send mail for user
                 await transporter.sendMail({
                     from: `"Gestion Recettes" <${process.env.EMAIL}>`,
                     to: user.mail,
