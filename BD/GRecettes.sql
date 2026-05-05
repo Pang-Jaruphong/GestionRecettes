@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `GestionRecettes`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `mail` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(60) NOT NULL,
+  `password` VARCHAR(60) NULL,
   `firstCon` TINYINT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `mail_UNIQUE` (`mail` ASC) VISIBLE)

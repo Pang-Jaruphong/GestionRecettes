@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/recettes.css" />
+    <title>Login</title>
+</head>
+<body>
+<section class="login">
+    <div class = "boxForm shadow">
+        <form class = "formLogin" id="formLogin">
+            <h1 class = "text-center mb-4 fw-bold">Login</h1>
+            <br />
+            <div class=" mb-3">
+                <label for="inputMail" class="form-label">Email</label>
+                <input
+                        type="email"
+                        class="form-control"
+                        id="inputMail"
+                        required />
+            </div>
+            <div class=" mb-3">
+                <label for="newPassword" class="form-label">Password</label>
+                <input
+                        type="password"
+                        class="form-control"
+                        id="newPassword"
+                        required />
+            </div>
+            <div class=" text-end mt-3">
+                <a href="#" id = "forgotPassword">
+                    Oublier le mot de passe
+                </a> <br />
+                <a href="#" id = "setupPassword">
+                    Modifier le mot de passe
+                </a> <br />
+                <a href="#" id = "changePassword">
+                    Première connexion
+                </a> <br />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</section>
+<script src = "login.js"></script>
+</body>
+</html>
