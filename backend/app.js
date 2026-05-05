@@ -5,12 +5,15 @@ import 'dotenv/config';
 const app = express();
 const port = process.env.PORT || 5000;
 
-import ingredientsRouter from './router/ingredients.js';
-
 app.use(express.json());
 app.use(cors());
 
+import ingredientsRouter from './router/ingredients.js';
+import authRouter from './router/auth.js';
+
 app.use('/ingredients', ingredientsRouter);
+app.use('/auth', authRouter);
+
 
 app.get('/', (req, res)=>{
     res.send('Système de gestion des recettes');
