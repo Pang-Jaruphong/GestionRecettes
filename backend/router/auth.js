@@ -51,7 +51,7 @@ authRouter.post('/login', async (req, res) => {
                 );
 
                 // Prepare lien for frontend
-                const resetLink = `http://localhost:5000/setupPassword?token=${resetToken}`;
+                const resetLink = `http://localhost:5000/setupPassword/setupPassword.html?token=${resetToken}`;
 
                 // Send mail for user
                 await transporter.sendMail({
@@ -130,6 +130,8 @@ authRouter.post('/setupPassword', async (req, res) => {
         // Update to DB
         await dbAuth.updateUserPassword(decoded.id, hashedPassword);
 
+        await dbAuth.updateFirstConnection(decoded.id, 0)
+
         res.status(200).json({
             message: 'Le mot de passe est mis à jour !'
         })
@@ -196,7 +198,7 @@ authRouter.post('/forgetPassword', async (req, res) => {
         );
 
         // Prepare lien for frontend
-        const resetLink = `http://localhost:5000/setupPassword?token=${resetToken}`;
+        const resetLink = `http://localhost:5000/setupPassword/setupPassword.html?token=${resetToken}`;
 
         // Send mail for user
         await transporter.sendMail({
