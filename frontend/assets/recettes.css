@@ -90,10 +90,10 @@ body, html {
     display: block;
     color: blue;
     font-size: 0.85rem;
-    margin-bottom: 0px;
     text-decoration: underline;
     font-style: italic;
     margin-bottom: 2px;
+    line-height: 1.2;
 }
 body { overflow: auto; display: flex; }
 
@@ -104,6 +104,9 @@ body { overflow: auto; display: flex; }
     color: white;
     padding: 20px;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .main-content {
     margin-left: 250px;
@@ -130,4 +133,69 @@ body { overflow: auto; display: flex; }
     margin-top: auto;
     color: #ff4d4d;
     cursor: pointer;
+}
+.search-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    margin:20px 0;
+}
+
+.search-input-white {
+    background-color: #ffffff;
+    border: 2px solid #00a65a;
+    color: #333 ;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.btn-search-validate {
+    background-color: #00a65a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    padding: 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.btn-search-validate:hover {
+    background-color: #008d4a;
+}
+
+.btn-search-validate:active {
+    transform: scale(0.98);
+}
+
+.btn-auth {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn {
+    background-color: #00a65a;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #008d4a;
+    transform: translateY(-2px);
 }
