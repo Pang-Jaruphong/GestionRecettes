@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/recettes.css" />
+    <title>Dashboard</title>
+</head>
+<body>
+<div class="sidebar d-flex flex-column">
+    <h2 class="mb-5 text-center">Gourmet Simple</h2>
+    <nav class="flew-grow-1">
+        <a href="#" class="nav-link active">Accueil</a>
+        <a href="recipes.html" class="nav-link">Recettes</a>
+        <a href="ingredients.html" class="nav-link">Ingrédients</a>
+
+        <div class="search-group">
+            <input type="text" id="sidebarSearch" placeholder="Rechercher..." class="search-input-white" >
+            <button id="btnSearch" class="btn-search-validate mt-2">Valider</button>
+        </div>
+    </nav>
+    <div class="mt-auto border.top pt-3">
+        <button id="loginBtn" class="btn-auth  login-btn w-100 mb-2">Se connecter</button>
+    </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="dashboard.js"></script>
+
+</body>
+</html>
