@@ -152,7 +152,7 @@ authRouter.post('/changePassword', async (req, res) => {
 
         const isMatch = await bcrypt.compare(oldPassword, user.password);
         if (!isMatch) {
-            res.status(401).send({ message : 'Le mot de passe incorrect'});
+            res.status(401).send({ message : 'Le mot de passe actuel is incorrect'});
         }
 
         if (newPassword.length < 8) {

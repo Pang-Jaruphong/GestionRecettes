@@ -9,13 +9,16 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
+// service fils static, middleware integrate Express, join current working directory ( abdolate file )
 app.use(express.static(path.join(process.cwd(), '../frontend')));
 
 import ingredientsRouter from './router/ingredients.js';
 import authRouter from './router/auth.js';
+import recipesRouter from './router/recipes.js';
 
 app.use('/ingredients', ingredientsRouter);
 app.use('/auth', authRouter);
+app.use('/recipes', recipesRouter);
 
 
 app.get('/', (req, res)=>{

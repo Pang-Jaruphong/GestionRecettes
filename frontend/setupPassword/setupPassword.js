@@ -44,12 +44,12 @@ if (passwordForm && window.location.pathname.includes('setupPassword.html')) {
 
             if (reponse.ok) {
                 alert("Mot de passe créé avec succès ! Vous pouvez se connecter");
-                window.location.href = "../dashbord/dashboard.html";
+                window.location.href = "../dashboard/dashboard.html";
             } else {
                 alert("Erreur venant du serveur !");
             }
-        } catch (error) {
-            console.error("Erreur technique : ", error);
+        } catch (err) {
+            console.error("Erreur technique : ", err);
             alert("Impossible de connexion du serveur !");
         }
     });

@@ -18,14 +18,14 @@ function displayRecipes(recipes) {
     });
 }
 
-// Fonction pour charger les données depuis le backend
-async function fetchTopRecipes() {
+// Function to charge information form backend
+async function fetchAllRecipes() {
     try {
-        // Remplace l'URL par celle de ton API réelle
-        const response = await fetch('http://localhost:5000/recipes/top');
+        // Remplace URL to real one
+        const response = await fetch('http://localhost:5000/recipes');
         const data = await response.json();
 
-        // C'est ici qu'on appelle ta fonction d'affichage avec les données reçues
+        // Call function to show info
         displayRecipes(data);
     } catch (error) {
         console.error("Erreur lors du chargement des recettes:", error);
@@ -33,7 +33,7 @@ async function fetchTopRecipes() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchTopRecipes();
+    fetchAllRecipes();
     const loginBtn = document.getElementById('loginBtn');
 
     if (loginBtn) {

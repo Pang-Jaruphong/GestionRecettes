@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 // dotenv go to .env, 2 files before
-dotenv.config({ path: path.resolve(process.cwd(), '../.env') });
+dotenv.config({ path: path.resolve(process.cwd(), 'backend/.env') });
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
