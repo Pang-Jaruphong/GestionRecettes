@@ -64,6 +64,24 @@ const dbRecipes = {
 
         };
         return await db.query(sql, [id]);
+    },
+
+    addReview: async (recipeId, note) => {
+        const sql = `
+            INSERT INTO reviews(value, recipe_id) 
+            VALUES (?,?)`;
+        return await db.query(sql, [note, recipeId]);
+    },
+
+    updateAverageNote: async (recipeId) => {
+        const sql = `
+            UPDATE recipes
+            SET moyNote = (
+                SELECT AVG(value) FROM reviews
+                WHERE recipe_id = ?
+                )
+                WHERE id = ?`;
+        return await db.query(sql, [recipeId, recipeId]);
     }
 }
 

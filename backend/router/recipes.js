@@ -1,5 +1,5 @@
 import express from 'express';
-import {dbRecipes} from '../db/dbRecieps.js';
+import {dbRecipes} from '../db/dbRecipes.js';
 
 const recipesRouter = express.Router();
 
@@ -37,5 +37,24 @@ recipesRouter.get('/:id', async (req, res) => {
         res.status(500).json({err:"Impossible de connexion de la base de données en détail"});
     }
 })
+
+recipesRouter.post("/:id/reviews", async (req, res) => {
+
+    try {
+        const { id } = req.params;
+        const { note } = req.body;
+
+        await dbRecipes.addReview(id, note);
+        await dbRecipes.updateAverageNote(id);
+
+        res.json({
+            message: "Avis ajouté"
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: "Erreur ajout avis"
+        });
+    }
+});
 
 export default recipesRouter;

@@ -1,7 +1,8 @@
 
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('id');
+
 document.addEventListener('DOMContentLoaded', async() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
 
     if (!id) return;
 
@@ -83,4 +84,5 @@ confirmAvis.addEventListener("click", async () => {
 
     avisModal.classList.add("hidden");
     location.reload();
+    console.log(recipe.moyNote)
 });
