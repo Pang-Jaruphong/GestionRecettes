@@ -22,6 +22,8 @@ if (loginForm) {
             });
             const data = await response.json();
 
+            console.log(data);
+
             if (response.ok){
                 if (data.message.includes("Première connexion")) {
                     alert(data.message);
@@ -30,7 +32,7 @@ if (loginForm) {
                 if (data.token) {
                     localStorage.setItem('jwt_token', data.token);
                     alert("Connexion réussie !");
-                    window.location.href = "../dashboard/dashboard.html";
+                    window.location.href = "/GestionRecettes/frontend/adminDashboard.html";
                 }
             } else {
                 alert(data.message || "Identifiants incorrects");

@@ -1,0 +1,79 @@
+
+.container-detail {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px;
+}
+
+.header-section {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.info-image img {
+    width: 400px;
+    border-radius: 20px;
+}
+
+.description-block {
+    margin-top: 40px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.footer-section {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#btn-avis {
+    background: #00b35c;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    width: 500px;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.back-btn {
+    float: left;
+    border: none;
+    background: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#stars span {
+    font-size: 35px;
+    cursor: pointer;
+}
+
+#confirmAvis {
+    margin-top: 25px;
+    padding: 10px 40px;
+}

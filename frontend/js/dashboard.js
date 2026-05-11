@@ -3,26 +3,28 @@ function displayRecipes(recipes) {
     container.innerHTML = '';
 
     recipes.forEach(recipe => {
+
         const card = `
-        <div class="recipe-card shadow-sm">
-            <img src="../assets/images/${recipe.photo}" alt="${recipe.title}" class="recipe-img">
-            <div class="recipe-details p-3">
-                <h4 class="fw-bold">${recipe.title}</h4>
-                <span class="badge bg-success mb-2">${recipe.category}</span>    
-                    <div class="text-warning">
-                        ${"★".repeat(recipe.moyNote)} <span class="text-muted small">(${recipe.moyNote}/5)</span>
-                    </div>
+        <a href="recipeDetail.html?id=${recipe.id}" class="text-decoration-none text-dark">
+            <div class="recipe-card shadow-sm">
+                <img src="assets/images/${recipe.photo}" alt="${recipe.title}" class="recipe-img">
+                <div class="recipe-details p-3">
+                    <h4 class="fw-bold">${recipe.title}</h4>
+                    <span class="badge bg-success mb-2">${recipe.category}</span>    
+                        <div class="text-warning">
+                            ${"★".repeat(recipe.moyNote)} <span class="text-muted small">(${recipe.moyNote}/5)</span>
+                        </div>
+                </div>
             </div>
-        </div>`;
+        </a>`;
         container.innerHTML += card;
     });
 }
 
-// Fonction pour charger les données depuis le backend
 async function fetchTopRecipes() {
     try {
         // Remplace l'URL par celle de ton API réelle
-        const response = await fetch('http://localhost:5000/recipes/top');
+        const response = await fetch(`${API_URL}/recipes/top`);
         const data = await response.json();
 
         // C'est ici qu'on appelle ta fonction d'affichage avec les données reçues
@@ -38,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loginBtn) {
         loginBtn.addEventListener('click', () => {
-            window.location.href = '../login/login.html';
+            window.location.href = 'login.html';
         })
     }
 })

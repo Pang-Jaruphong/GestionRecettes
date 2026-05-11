@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/recettes.css" />
+    <link rel="stylesheet" href="assets/recipeDetail.css" />
+    <title>Recipes detail</title>
+</head>
+<body>
+
+<div class="container-detail">
+    <a href="dashboard.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>← Retour à l'accueil
+    </a>
+
+    <div id="recipesContent">
+        <h1 id = "recipeTitle" class="text-center">Titre</h1>
+        <div class="header-section">
+            <div class="info-text">
+                <p><strong>Catégorie : </strong><span id="recipeCategoy">...</span></p>
+                <p><strong>Préparation : </strong><span id="recipePrep">...</span> minutes</p>
+                <p><strong>Cuisson : </strong><span id="recipeCook">...</span> minutes</p>
+                <p><strong>Portion : </strong><span id="recipePortion">...</span> personnes</p>
+
+                <h4 class="mt-4">Ingrédients : </h4>
+                <ul id="ingredientsList">
+                    </ul>
+            </div>
+            <div class="info-image">
+                <img id="recipeImage" src="" alt="Image recette">
+            </div>
+        </div>
+    </div>
+
+    <div class="description-block">
+        <h4>Description : </h4>
+        <p id="recipeDescription">...</p>
+    </div>
+
+    <div class="footer-section">
+        <p><strong>Notes : </strong><span id="recipeNote">...</span> / 5 </p>
+        <button class="button" id="btn-avis">Donner avis</button>
+    </div>
+
+    <div id="avisModal" class= "modal hidden">
+        <div class="modal-content">
+            <button id="closeAvis" class="back-btn">←</button>
+
+            <p>Votre avis nous intéresse! Aimez-vous cette recette?</p>
+
+            <div id="stars">
+                <span data-note="1">☆</span>
+                <span data-note="2">☆</span>
+                <span data-note="3">☆</span>
+                <span data-note="4">☆</span>
+                <span data-note="5">☆</span>
+            </div>
+
+            <button id="confirmAvis">Confirmer</button>
+        </div>
+    </div>
+</div>
+<script src="js/config.js"></script>
+<script src="js/recipesDetail.js"></script>
+</body>
+</html>
