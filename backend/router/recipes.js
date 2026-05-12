@@ -1,5 +1,6 @@
 import express from 'express';
 import {dbRecipes} from '../db/dbRecipes.js';
+import {verifyToken} from '../middleware/authMiddleware.js';
 
 const recipesRouter = express.Router();
 
@@ -56,5 +57,23 @@ recipesRouter.post("/:id/reviews", async (req, res) => {
         });
     }
 });
+
+recipesRouter.post('/', verifyToken, async (req, res) => {
+
+    try {
+
+        const recipeId = await dbRecipes.createRecipe(req.body);
+
+        res.status(201).json({
+            message: "Recette ajoutée",
+            id: recipeId,
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: "Erreur ajout recette"
+        });
+    }
+})
 
 export default recipesRouter;

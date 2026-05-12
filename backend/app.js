@@ -15,10 +15,12 @@ app.use(express.static(path.join(process.cwd(), '../frontend')));
 import ingredientsRouter from './router/ingredients.js';
 import authRouter from './router/auth.js';
 import recipesRouter from './router/recipes.js';
+import categoriesRouter from "./router/categories.js";
 
 app.use('/ingredients', ingredientsRouter);
 app.use('/auth', authRouter);
 app.use('/recipes', recipesRouter);
+app.use('/categories', categoriesRouter);
 
 
 app.get('/', (req, res)=>{

@@ -29,13 +29,14 @@ const dbRecipes = {
         const sql = `
             SELECT  r.id, r.title, c.name AS category,
                     r.prepareTime, r.cookTime, r.portion, r.photo,
-                    i.name AS ingredients, rhi.quantity, 
+                    i.name AS ingredients, 
+                    rhi.quantity, 
                     rhi.unity, 
                     r.description, r.moyNote
-            FROM recipes_has_ingredients rhi
-            JOIN recipes r ON rhi.recipe_id = r.id
+            FROM recipes r
             JOIN categories c ON r.category_id = c.id
-            JOIN ingredients i on rhi.ingredient_id = i.id
+            LEFT JOIN recipes_has_ingredients rhi ON rhi.recipe_id = r.id
+            LEFT JOIN ingredients i on rhi.ingredient_id = i.id
             WHERE r.id = ?`;
 
         // create object first
@@ -56,10 +57,12 @@ const dbRecipes = {
             description: rows[0].description,
             moyNote: rows[0].moyNote,
 
-            ingredients: rows.map(row => ({
-                name: row.ingredients,
-                quantity: row.quantity,
-                unity: row.unity
+            ingredients: rows
+                .filter(row => row.ingredientName !== null)
+                .map(row => ({
+                    name: row.ingredients,
+                    quantity: row.quantity,
+                    unity: row.unity
             }))
 
         };
@@ -82,6 +85,40 @@ const dbRecipes = {
                 )
                 WHERE id = ?`;
         return await db.query(sql, [recipeId, recipeId]);
+    },
+
+    createRecipe: async (recipe) => {
+        const sql = `
+            INSERT INTO recipes
+                (title, prepareTime, cookTime, portion, description, photo, moyNote, category_id)
+                VALUES (?,?,?,?,?,?,0,?)
+            `;
+        const result = await db.query(sql, [
+            recipe.title,
+            recipe.prepareTime,
+            recipe.cookTime,
+            recipe.portion,
+            recipe.description,
+            recipe.photo,
+            recipe.category_id
+        ]);
+
+        const recipeId = result.insertId;
+
+        for (const ingredient of recipe.ingredients) {
+            const sqlIngredient =`
+                INSERT INTO recipes_has_ingredients
+                (recipe_id, ingredient_id, quantity, unity)
+                VALUES (?,?,?,?)
+            `;
+            await db.query(sqlIngredient, [
+                recipeId,
+                ingredient.ingredient_id,
+                ingredient.quantity,
+                ingredient.unity,
+            ]);
+        }
+        return recipeId;
     }
 }
 
