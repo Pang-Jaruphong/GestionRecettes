@@ -11,16 +11,21 @@ function displayRecipes(recipes) {
     recipes.forEach(recipe => {
         const card = `
         <a href="recipeDetail.html?id=${recipe.id}" class="text-decoration-none text-dark">
-            <div class="recipe-card shadow-sm">
+            <div class="recipe-card shadow-sm admin-recipe-card">
                 <img src="assets/images/${recipe.photo}" alt="${recipe.title}" class="recipe-img">
+                
                 <div class="recipe-details p-3">
                     <h4 class="fw-bold">${recipe.title}</h4>
                     <span class="badge bg-success mb-2">${recipe.category}</span>    
-                        <div class="text-warning">
+                       
+                       <div class="text-warning">
                             ${"★".repeat(recipe.moyNote)} <span class="text-muted small">(${recipe.moyNote}/5)</span>
-                        </div>
-                <button onclick="editRecipe(${recipe.id})">Modifier</button>
-                <button onclick="deleteRecipe(${recipe.id})">Supprimer</button>
+                       </div>
+                     
+                     <div class="admin-action">
+                        <button onclick="editRecipe(${recipe.id})" class="btn-edit">Modifier</button>
+                        <button onclick="deleteRecipe(${recipe.id})" class="btn-delete">Supprimer</button>    
+                     </div>
                 </div>
             </div>`;
 
@@ -32,7 +37,7 @@ function displayRecipes(recipes) {
 async function fetchTopRecipes() {
     try {
         // Remplace URL
-        const response = await fetch(`${API_URL}recipes/top`);
+        const response = await fetch(`${API_URL}/recipes/top`);
         const data = await response.json();
 
         // Show informations
@@ -43,7 +48,7 @@ async function fetchTopRecipes() {
 }
 
 async function deleteRecipe(id) {
-    await fetch(`http://localhost:5000/recipes/${id}`, {
+    await fetch(`${API_URL}/recipes/${id}`, {
         method: "DELETE",
         headers: {
             Authorization: token
@@ -80,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loginBtn) {
         loginBtn.addEventListener('click', () => {
-            window.location.href = '/GestionRecettes/frontend/login.html';
+            window.location.href = 'login.html';
         })
     }
 })
