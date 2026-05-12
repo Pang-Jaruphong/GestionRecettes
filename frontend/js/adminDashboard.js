@@ -1,7 +1,7 @@
 const token = localStorage.getItem("jwt_token");
 
 if (!token) {
-    window.location.href = "login.html";
+    window.location.href = "dashboard.html";
 }
 
 function displayRecipes(recipes) {
@@ -81,18 +81,18 @@ async function editRecipe(id) {
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchTopRecipes();
-    const loginBtn = document.getElementById('loginBtn');
 
-    if (loginBtn) {
-        loginBtn.addEventListener('click', () => {
-            window.location.href = 'login.html';
-        })
-    }
+    document.getElementById("addRecipeBtn").addEventListener("click", async e => {
+        window.location.href = "addRecipe.html";
+    });
+
+    /*
+    document.getElementById("modifyRecipeBtn").addEventListener("click", async e => {
+        window.location.href = "modifyRecipe.html";
+    });
+*/
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+    });
 })
-
-document.getElementById("logoutBtn").addEventListener("click", () => {
-    localStorage.removeItem("token");
-    window.location.href = "login.html";
-});
-
-loadRecipes();

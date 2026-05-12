@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/recettes.css" />
+    <title>Add Recipe</title>
 </head>
 <body>
-$END$
+<div class="container-detail">
+
+  <a href="adminDashboard.html" class="back-link">← Retour AdminDashboard</a>
+
+  <h1>Ajouter une recette</h1>
+
+  <form id="addRecipeForm">
+
+    <label>Titre</label>
+    <input type="text" id="title" required>
+
+    <label>Catégorie</label>
+    <select id="category" required></select>
+
+    <label>Préparation</label>
+    <input type="number" id="prepareTime" min="1" required>
+
+    <label>Cuisson</label>
+    <input type="number" id="cookTime" min="1"required>
+
+    <label>Portion</label>
+    <input type="number" id="portion" min="1"required>
+
+    <label>Photo</label>
+    <input type="text" id="photo" placeholder="ex: curry.jpg">
+
+    <label>Description</label>
+    <textarea id="description" required></textarea>
+
+    <h3>Ingrédients</h3>
+    <div id="ingredientsContainer"></div>
+
+    <button type="button" id="addIngredientBtn">
+      Ajouter un ingrédient
+    </button>
+
+    <button type="submit">
+      Enregistrer la recette
+    </button>
+
+  </form>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/addRecipe.js"></script>
+
 </body>
 </html>
