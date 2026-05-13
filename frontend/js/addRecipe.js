@@ -1,7 +1,7 @@
 const token = localStorage.getItem("jwt_token");
 
 if (!token) {
-    window.location.href = "dashboard.js";
+    window.location.href = "dashboard.html";
 }
 
 const form = document.getElementById('addRecipeForm');

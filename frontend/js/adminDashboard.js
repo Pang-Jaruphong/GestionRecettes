@@ -10,8 +10,9 @@ function displayRecipes(recipes) {
 
     recipes.forEach(recipe => {
         const card = `
-        <a href="recipeDetail.html?id=${recipe.id}" class="text-decoration-none text-dark">
-            <div class="recipe-card shadow-sm admin-recipe-card">
+        <div class="recipe-card shadow-sm admin-recipe-card">
+            <a href="recipeDetail.html?id=${recipe.id}" class="text-decoration-none text-dark">
+            
                 <img src="assets/images/${recipe.photo}" alt="${recipe.title}" class="recipe-img">
                 
                 <div class="recipe-details p-3">
@@ -21,14 +22,14 @@ function displayRecipes(recipes) {
                        <div class="text-warning">
                             ${"★".repeat(recipe.moyNote)} <span class="text-muted small">(${recipe.moyNote}/5)</span>
                        </div>
-                     
-                     <div class="admin-action">
-                        <button onclick="editRecipe(${recipe.id})" class="btn-edit">Modifier</button>
-                        <button onclick="deleteRecipe(${recipe.id})" class="btn-delete">Supprimer</button>    
-                     </div>
                 </div>
-            </div>`;
-
+            </a>
+                
+            <div class="admin-actions p-3 border-top">
+                 <button onclick="editRecipe(${recipe.id})" class="btn-edit">Modifier</button>
+                 <button onclick="deleteRecipe(${recipe.id}, '${recipe.title}')" class="btn-delete">Supprimer</button>
+            </div>
+        </div>`
         container.innerHTML += card;
     });
 }
@@ -40,22 +41,33 @@ async function fetchTopRecipes() {
         const response = await fetch(`${API_URL}/recipes/top`);
         const data = await response.json();
 
-        // Show informations
+        // Show information
         displayRecipes(data);
     } catch (error) {
         console.error("Erreur lors du chargement des recettes:", error);
     }
 }
 
-async function deleteRecipe(id) {
-    await fetch(`${API_URL}/recipes/${id}`, {
-        method: "DELETE",
-        headers: {
-            Authorization: token
+async function deleteRecipe(id, title) {
+    if (confirm(`Voulez-vous vraiment supprimer cette recette : ${title}`)) {
+        try {
+            const response = await fetch(`${API_URL}/recipes/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: token
+                }
+            });
+            if (response.ok) {
+                alert( `La recette ${title} est supprimée avec succès`)
+                fetchTopRecipes();
+            } else {
+                alert("Erreur lors de la suppression")
+            }
+        } catch (error) {
+            console.error("Erreur lors du chargement des recettes");
         }
-    });
-
-    loadRecipes();
+    }
 }
 
 async function editRecipe(id) {
@@ -76,7 +88,7 @@ async function editRecipe(id) {
         })
     });
 
-    loadRecipes();
+    fetchTopRecipes();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -91,8 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = "modifyRecipe.html";
     });
 */
+
     document.getElementById("logoutBtn").addEventListener("click", () => {
-        localStorage.removeItem("token");
+        localStorage.removeItem("jwt_token");
         window.location.href = "login.html";
     });
 })

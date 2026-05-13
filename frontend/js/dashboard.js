@@ -25,22 +25,29 @@ async function fetchTopRecipes() {
     try {
         // Remplace l'URL par celle de ton API réelle
         const response = await fetch(`${API_URL}/recipes/top`);
+
+        if (!response.ok) {
+            throw new Error("Route recipes introuvable");
+        }
+
         const data = await response.json();
 
-        // C'est ici qu'on appelle ta fonction d'affichage avec les données reçues
+        // show information
         displayRecipes(data);
+
     } catch (error) {
         console.error("Erreur lors du chargement des recettes:", error);
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     fetchTopRecipes();
-    const loginBtn = document.getElementById('loginBtn');
+
+    const loginBtn = document.getElementById("loginBtn");
 
     if (loginBtn) {
-        loginBtn.addEventListener('click', () => {
-            window.location.href = 'login.html';
-        })
+        loginBtn.addEventListener("click", () => {
+            window.location.href = "login.html";
+        });
     }
-})
+});

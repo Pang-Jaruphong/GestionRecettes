@@ -58,7 +58,7 @@ const dbRecipes = {
             moyNote: rows[0].moyNote,
 
             ingredients: rows
-                .filter(row => row.ingredientName !== null)
+                .filter(row => row.ingredients !== null)
                 .map(row => ({
                     name: row.ingredients,
                     quantity: row.quantity,
@@ -119,7 +119,26 @@ const dbRecipes = {
             ]);
         }
         return recipeId;
+    },
+
+    deleteRecipe: async (recipeId) => {
+        // delete fk put ON CASCADE
+        await db.query(
+            `DELETE FROM recipes_has_ingredients WHERE recipe_id = ?`,
+            [recipeId]
+        );
+
+        await db.query(
+            `DELETE FROM reviews WHERE recipe_id = ?`,
+            [recipeId]
+        );
+
+        const sql = `
+            DELETE FROM recipes WHERE id = ?`;
+
+        return await db.query(sql, [recipeId]);
     }
+
 }
 
 

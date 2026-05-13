@@ -74,6 +74,21 @@ recipesRouter.post('/', verifyToken, async (req, res) => {
             message: "Erreur ajout recette"
         });
     }
+});
+
+recipesRouter.delete('/:id', verifyToken, async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deleted = await dbRecipes.deleteRecipe(id);
+
+        res.status(200).json({
+            message : "La recette est supprimée avec succès"
+        })
+    } catch (err) {
+        res.status(500).json({
+            message: "Erreur du serveur"
+    })
+    }
 })
 
 export default recipesRouter;
