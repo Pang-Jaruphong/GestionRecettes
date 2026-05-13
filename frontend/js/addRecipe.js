@@ -52,8 +52,8 @@ function addIngredientRow() {
     
         <input type="text" class="ingredient-unity" placeholder="Unité">
     
-        <button type="button" class="removeIngredientBtn">
-            Supprimer
+        <button type="button" class="removeIngredientBtn btn-delete-small">
+            -
         </button>`;
 
     row.querySelector(".removeIngredientBtn").addEventListener("click", () => {

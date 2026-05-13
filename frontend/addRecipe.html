@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="assets/recettes.css" />
+  <link rel="stylesheet" href="assets/recipeDetail.css" />
     <title>Add Recipe</title>
 </head>
 <body>
@@ -13,40 +14,51 @@
 
   <h1>Ajouter une recette</h1>
 
-  <form id="addRecipeForm">
+  <form id="addRecipeForm" class="recipe-form">
 
-    <label>Titre</label>
-    <input type="text" id="title" required>
+    <div class="form-card">
+      <div class="form-grid">
 
-    <label>Catégorie</label>
-    <select id="category" required></select>
+        <div>
+          <label>Titre</label>
+          <input type="text" id="title" required>
 
-    <label>Préparation</label>
-    <input type="number" id="prepareTime" min="1" required>
+          <label>Catégorie</label>
+          <select id="category" required></select>
 
-    <label>Cuisson</label>
-    <input type="number" id="cookTime" min="1"required>
+          <label>Préparation</label>
+          <input type="number" id="prepareTime" min="1" required>
 
-    <label>Portion</label>
-    <input type="number" id="portion" min="1"required>
+          <label>Cuisson</label>
+          <input type="number" id="cookTime" min="1"required>
 
-    <label>Photo</label>
-    <input type="text" id="photo" placeholder="ex: curry.jpg">
+          <label>Portion</label>
+          <input type="number" id="portion" min="1"required>
+        </div>
 
-    <label>Description</label>
-    <textarea id="description" required></textarea>
+        <div>
+          <label>Photo</label>
+          <input type="text" id="photo" placeholder="ex: curry.jpg">
 
-    <h3>Ingrédients</h3>
-    <div id="ingredientsContainer"></div>
+          <label>Description</label>
+          <textarea id="description" required></textarea>
 
-    <button type="button" id="addIngredientBtn">
-      Ajouter un ingrédient
-    </button>
+          <h3>Ingrédients</h3>
+          <div id="ingredientsContainer"></div>
 
-    <button type="submit">
-      Enregistrer la recette
-    </button>
+          <button type="button" id="addIngredientBtn" class="secondary-btn">
+             + Ajouter
+          </button>
+        </div>
+      </div>
+    </div>
 
+    <div class="footer-section">
+      <p></p>
+      <button type="submit" class="button-save">
+        Enregistrer
+      </button>
+    </div>
   </form>
 
 </div>
