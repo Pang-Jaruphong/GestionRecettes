@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/recettes.css" />
     <title>Admin Recipe</title>
 </head>
 <body>
+<div class="sidebar d-flex flex-column">
+    <h2 class="mb-5 text-center">Gourmet Simple</h2>
+    <nav class="flew-grow-1">
+        <a href="adminDashboard.html" class="nav-link">Accueil</a>
+        <a href="#" class="nav-link active">Recettes</a>
+        <a href="ingredients.html" class="nav-link">Ingrédients</a>
+
+        <div class="search-group">
+            <input type="text" id="sidebarSearch" placeholder="Rechercher..." class="search-input-white" >
+            <button id="btnSearch" class="btn-search-validate mt-2">Valider</button>
+        </div>
+    </nav>
+    <div class="mt-auto border.top pt-3">
+        <button id="logoutBtn" class="logout-btn">Se déconnecter</button>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="admin-top">
+        <div>
+            <h1 style="color: #030444;">Bienvenue !</h1>
+            <h2 class="titre-section"> Nos recettes</h2>
+        </div>
+
+        <button id="addRecipeBtn" class="add-recipe-btn">
+            + Ajouter
+        </button>
+    </div>
+
+    <div id="recipeList" class="recipe-grid"></div>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/adminRecipes.js"></script>
 
 </body>
 </html>
