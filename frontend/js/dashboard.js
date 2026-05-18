@@ -5,7 +5,7 @@ function displayRecipes(recipes) {
     recipes.forEach(recipe => {
 
         const card = `
-        <a href="recipeDetail.html?id=${recipe.id}" class="text-decoration-none text-dark">
+        <a href="recipeDetail.html?id=${recipe.id}&from=user" class="text-decoration-none text-dark">
             <div class="recipe-card shadow-sm">
                 <img src="assets/images/${recipe.photo}" alt="${recipe.title}" class="recipe-img">
                 <div class="recipe-details p-3">

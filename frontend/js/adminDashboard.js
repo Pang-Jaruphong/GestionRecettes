@@ -11,7 +11,7 @@ function displayRecipes(recipes) {
     recipes.forEach(recipe => {
         const card = `
         <div class="recipe-card shadow-sm admin-recipe-card">
-            <a href="recipeDetail.html?id=${recipe.id}" class="text-decoration-none text-dark">
+            <a href="recipeDetail.html?id=${recipe.id}&from=admin" class="text-decoration-none text-dark">
             
                 <img src="assets/images/${recipe.photo}" alt="${recipe.title}" class="recipe-img">
                 
@@ -71,24 +71,7 @@ async function deleteRecipe(id, title) {
 }
 
 async function editRecipe(id) {
-    const title = prompt("Nouveau titre");
-    const category = prompt("Nouvelle catégorie");
-    const photo = prompt("Nouvelle image");
-
-    await fetch(`${API_URL}/recipes/${id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: token
-        },
-        body: JSON.stringify({
-            title,
-            category,
-            photo
-        })
-    });
-
-    fetchTopRecipes();
+    window.location.href = `updateRecipe.html?id=${id}`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

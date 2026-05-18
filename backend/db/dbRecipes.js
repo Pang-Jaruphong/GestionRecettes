@@ -27,9 +27,9 @@ const dbRecipes = {
 
     getDetailRecipes: async (id) => {
         const sql = `
-            SELECT  r.id, r.title, c.name AS category,
+            SELECT  r.id, r.title, c.name AS category, r.category_id,
                     r.prepareTime, r.cookTime, r.portion, r.photo,
-                    i.name AS ingredients, 
+                    i.name AS ingredientName, rhi.ingredient_id,
                     rhi.quantity, 
                     rhi.unity, 
                     r.description, r.moyNote
@@ -57,10 +57,13 @@ const dbRecipes = {
             description: rows[0].description,
             moyNote: rows[0].moyNote,
 
+            category_id: rows[0].category_id,
+
             ingredients: rows
-                .filter(row => row.ingredients !== null)
+                .filter(row => row.ingredient_id !== null)
                 .map(row => ({
-                    name: row.ingredients,
+                    ingredient_id: row.ingredient_id,
+                    name: row.ingredientName,
                     quantity: row.quantity,
                     unity: row.unity
             }))
@@ -106,12 +109,12 @@ const dbRecipes = {
         const recipeId = result.insertId;
 
         for (const ingredient of recipe.ingredients) {
-            const sqlIngredient =`
+            const sql =`
                 INSERT INTO recipes_has_ingredients
                 (recipe_id, ingredient_id, quantity, unity)
                 VALUES (?,?,?,?)
             `;
-            await db.query(sqlIngredient, [
+            await db.query(sql, [
                 recipeId,
                 ingredient.ingredient_id,
                 ingredient.quantity,
@@ -137,8 +140,47 @@ const dbRecipes = {
             DELETE FROM recipes WHERE id = ?`;
 
         return await db.query(sql, [recipeId]);
-    }
+    },
 
+    updateRecipe: async (id, recipe) => {
+        const sql = `
+            UPDATE recipes SET
+                title = ?, prepareTime = ?,
+                cookTime = ?, portion = ?,
+                description = ?, photo = ?,
+                category_id = ?
+            WHERE id = ?`;
+
+        await db.query(sql, [
+            recipe.title,
+            recipe.prepareTime,
+            recipe.cookTime,
+            recipe.portion,
+            recipe.description,
+            recipe.photo,
+            recipe.category_id,
+            id
+            ]);
+
+        await db.query(`
+            DELETE FROM recipes_has_ingredients WHERE recipe_id = ?`,
+            [id]
+        );
+
+        for (const ingredient of recipe.ingredients) {
+            const sqlIngredient = `
+                INSERT INTO recipes_has_ingredients
+                (recipe_id, ingredient_id, quantity, unity)
+                VALUES (?,?,?,?)`;
+
+             await db.query(sqlIngredient, [
+                id,
+                ingredient.ingredient_id,
+                ingredient.quantity,
+                ingredient.unity,
+            ]);
+        }
+    }
 }
 
 

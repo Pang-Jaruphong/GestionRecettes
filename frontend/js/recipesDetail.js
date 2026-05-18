@@ -1,6 +1,18 @@
+// const token = localStorage.getItem("jwt_token");
 
 const urlParams = new URLSearchParams(window.location.search);
+
 const id = urlParams.get('id');
+const from = urlParams.get("from");
+
+const backLink = document.getElementById("backLink");
+
+if (from === "admin") {
+    backLink.href = "adminDashboard.html";
+} else {
+    backLink.href = "dashboard.html";
+}
+
 
 document.addEventListener('DOMContentLoaded', async() => {
 

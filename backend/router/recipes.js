@@ -35,7 +35,11 @@ recipesRouter.get('/:id', async (req, res) => {
         res.json(recipe);
 
     } catch (err) {
-        res.status(500).json({err:"Impossible de connexion de la base de données en détail"});
+        console.error("Erreur getDetailRecipes :", err);
+        res.status(500).json({
+            message:"Impossible de connexion de la base de données en détail",
+            error: err.message
+        });
     }
 })
 
@@ -90,5 +94,22 @@ recipesRouter.delete('/:id', verifyToken, async (req, res) => {
     })
     }
 })
+
+recipesRouter.put('/:id', verifyToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await dbRecipes.updateRecipe(id, req.body);
+
+        res.status(200).json({
+            message : "Recette modifiée avec succeès"
+        })
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: "Erreur la modification de la recette"
+        });
+    }
+});
 
 export default recipesRouter;
