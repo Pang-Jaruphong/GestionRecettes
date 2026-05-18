@@ -74,18 +74,52 @@ async function editRecipe(id) {
     window.location.href = `updateRecipe.html?id=${id}`;
 }
 
+const searchInput = document.getElementById("sidebarSearch");
+const btnSearch = document.getElementById("btnSearch");
+
+if (btnSearch && searchInput) {
+    btnSearch.addEventListener("click", async(e) => {
+        e.preventDefault();
+
+        const keyword = searchInput.value.trim();
+
+        if (!keyword) {
+            fetchTopRecipes();
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/recipes/search/${keyword}`);
+
+            const recipes = await response.json();
+
+            if (!Array.isArray(recipes)) {
+                console.error("Réponse inattendue :", recipes);
+                return;
+            }
+
+            if (recipes.length === 0) {
+
+                document.getElementById("recipeList").innerHTML = `
+            <p>
+                Aucune recette ne correspond à cette recherche.
+            </p>
+            `;
+                return;
+            }
+            displayRecipes(recipes);
+        } catch (err) {
+            console.error("Erreur lors du chargement des recettes", err);
+        }
+    })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchTopRecipes();
 
     document.getElementById("addRecipeBtn").addEventListener("click", async e => {
         window.location.href = "addRecipe.html";
     });
-
-    /*
-    document.getElementById("modifyRecipeBtn").addEventListener("click", async e => {
-        window.location.href = "modifyRecipe.html";
-    });
-*/
 
     document.getElementById("logoutBtn").addEventListener("click", () => {
         localStorage.removeItem("jwt_token");

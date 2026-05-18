@@ -22,6 +22,21 @@ recipesRouter.get('/top', async (req, res) => {
     }
 })
 
+recipesRouter.get("/search/:keyword", async (req, res) => {
+    try {
+        const keyword = req.params.keyword;
+        const recipes = await dbRecipes.searchRecipes(keyword);
+
+        res.json(recipes);
+    } catch (err) {
+        console.error(err);
+
+        res.status(500).json({
+            message : "Erreur de recherche"
+        });
+    }
+});
+
 recipesRouter.get('/:id', async (req, res) => {
     const id = req.params.id;
 

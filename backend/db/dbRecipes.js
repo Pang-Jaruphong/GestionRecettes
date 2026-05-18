@@ -180,7 +180,34 @@ const dbRecipes = {
                 ingredient.unity,
             ]);
         }
-    }
+    },
+
+    searchRecipes: async (keyword) => {
+        const sql = `
+            SELECT DISTINCT 
+                r.id,
+                r.title,
+                r.photo,
+                r.moyNote,
+                c.name AS category
+            FROM recipes r
+            JOIN categories c ON r.category_id = c.id
+            LEFT JOIN recipes_has_ingredients rhi ON rhi.recipe_id = r.id
+            LEFT JOIN ingredients i ON rhi.ingredient_id = i.id
+            WHERE 
+                r.title LIKE ?
+                OR c.name LIKE ?
+                OR i.name LIKE ?
+            ORDER BY r.title
+        `;
+        const search = `%${keyword}%`;
+
+        return await db.query(sql, [
+            search,
+            search,
+            search
+        ]);
+    },
 }
 
 
