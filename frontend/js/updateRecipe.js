@@ -150,8 +150,24 @@ form.addEventListener("submit", async (event) => {
 
     alert(data.message);
 
-    window.location.href = "adminDashboard.html";
+    window.location.href = "adminRecipes.html";
 });
+
+const cancelBtn = document.getElementById("cancelBtn");
+
+if (cancelBtn) {
+
+    cancelBtn.addEventListener("click", () => {
+
+        const confirmCancel = confirm(
+            "Êtes-vous sûr de vouloir annuler ? Les données saisies seront perdues."
+        );
+
+        if (confirmCancel) {
+            window.location.href = "adminRecipes.html";
+        }
+    });
+}
 
 async function init() {
     await loadCategories();

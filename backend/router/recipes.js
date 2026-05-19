@@ -80,6 +80,13 @@ recipesRouter.post("/:id/reviews", async (req, res) => {
 recipesRouter.post('/', verifyToken, async (req, res) => {
 
     try {
+        const recipe = req.body;
+
+        if (!recipe.ingredients || recipe.ingredients.length === 0) {
+            return res.status(400).json({
+                message: "Une recette doit contenir au moins un ingrédient."
+            });
+        }
 
         const recipeId = await dbRecipes.createRecipe(req.body);
 

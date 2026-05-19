@@ -8,9 +8,9 @@ const from = urlParams.get("from");
 const backLink = document.getElementById("backLink");
 
 if (from === "admin") {
-    backLink.href = "adminDashboard.html";
+    backLink.href = "adminRecipes.html";
 } else {
-    backLink.href = "dashboard.html";
+    backLink.href = "Recipes.html";
 }
 
 
@@ -93,6 +93,8 @@ confirmAvis.addEventListener("click", async () => {
             note: selectedNote
         })
     });
+
+    alert("Merci pour votre avis!");
 
     avisModal.classList.add("hidden");
     location.reload();
