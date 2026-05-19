@@ -30,7 +30,7 @@ if (passwordForm && window.location.pathname.includes('setupPassword.html')) {
 
         try {
             // send to backend with fetch
-            const reponse = await fetch(`${API_URL}/auth/setupPassword`, {
+            const reponse = await fetch(`${API_URL}/auth/changePassword`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -44,7 +44,7 @@ if (passwordForm && window.location.pathname.includes('setupPassword.html')) {
 
             if (reponse.ok) {
                 alert("Mot de passe créé avec succès ! Vous pouvez se connecter");
-                window.location.href = "dashboard.html";
+                window.location.href = "login.html";
             } else {
                 alert("Erreur venant du serveur !");
             }

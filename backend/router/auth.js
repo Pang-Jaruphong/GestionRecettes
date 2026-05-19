@@ -51,7 +51,7 @@ authRouter.post('/login', async (req, res) => {
                 );
 
                 // Prepare lien for frontend
-                const resetLink = `http://localhost:5000/setupPassword/setupPassword.html?token=${resetToken}`;
+                const resetLink = `http://localhost:5000/createPassword.html?token=${resetToken}`;
 
                 // Send mail for user
                 await transporter.sendMail({
@@ -130,7 +130,7 @@ authRouter.post('/setupPassword', async (req, res) => {
         // Update to DB
         await dbAuth.updateUserPassword(decoded.id, hashedPassword);
 
-        await dbAuth.updateFirstConnection(decoded.id, 0)
+        // await dbAuth.updateFirstConnection(decoded.id, 0)
 
         res.status(200).json({
             message: 'Le mot de passe est mis à jour !'
@@ -144,15 +144,23 @@ authRouter.post('/setupPassword', async (req, res) => {
 authRouter.post('/changePassword', async (req, res) => {
     const { mail,oldPassword, newPassword, confirmNewPassword } = req.body;
 
+    console.log("Tentative de changement pour :", mail);
+    console.log("Body reçu :", req.body);
+
     try {
         const user = await dbAuth.getUserByMail(mail);
+
+        console.log("Recherche mail :", mail);
+        console.log("Résultat BDD :", user);
+
         if (!user) {
             return res.status(404).json({message : 'Données invalide'});
         }
 
         const isMatch = await bcrypt.compare(oldPassword, user.password);
         if (!isMatch) {
-            res.status(401).send({ message : 'Le mot de passe actuel is incorrect'});
+            return res.status(401).send({
+                message : 'Le mot de passe actuel is incorrect'});
         }
 
         if (newPassword.length < 8) {
@@ -178,7 +186,7 @@ authRouter.post('/changePassword', async (req, res) => {
 });
 
 // Forget password
-authRouter.post('/forgetPassword', async (req, res) => {
+authRouter.post('/forgotPassword', async (req, res) => {
     const { mail } = req.body;
 
     try {
@@ -198,7 +206,7 @@ authRouter.post('/forgetPassword', async (req, res) => {
         );
 
         // Prepare lien for frontend
-        const resetLink = `http://localhost:5000/setupPassword/setupPassword.html?token=${resetToken}`;
+        const resetLink = `http://localhost:5000/createPassword.html?token=${resetToken}`;
 
         // Send mail for user
         await transporter.sendMail({
