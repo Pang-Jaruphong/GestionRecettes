@@ -21,6 +21,7 @@ app.use('/ingredients', ingredientsRouter);
 app.use('/auth', authRouter);
 app.use('/recipes', recipesRouter);
 app.use('/categories', categoriesRouter);
+app.use('/ingredients', ingredientsRouter);
 
 
 app.get('/', (req, res)=>{

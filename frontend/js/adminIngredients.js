@@ -1,3 +1,9 @@
+const token = localStorage.getItem("jwt_token");
+
+if (!token) {
+    window.location.href = "dashboard.html";
+}
+
 function displayIngredients(ingredients) {
     const container = document.getElementById("ingredientsList");
     container.innerHTML = "";
@@ -74,3 +80,12 @@ if (btnSearch && searchInput) {
         }
     })
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchIngredients();
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("jwt_token");
+        window.location.href = "login.html";
+    });
+})
