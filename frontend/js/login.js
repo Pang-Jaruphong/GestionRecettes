@@ -2,11 +2,9 @@
 const loginForm = document.getElementById('formLogin');
 
 if (loginForm) {
-    console.log("Formulaire de login détecté !");
 
     loginForm.addEventListener('submit', async function (event) {
         event.preventDefault();
-        console.log("le bouton login a été cliqué !")
 
         const mail = document.getElementById("inputMail").value;
         const password = document.getElementById("newPassword").value;
@@ -21,8 +19,6 @@ if (loginForm) {
                 })
             });
             const data = await response.json();
-
-            console.log(data);
 
             if (response.ok){
                 if (data.message.includes("Première connexion")) {

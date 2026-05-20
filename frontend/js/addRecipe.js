@@ -78,20 +78,55 @@ form.addEventListener("submit", async (event) => {
         });
     });
 
+    // aider par ChatGPT
+    // Get champ image
+
+    // imag optional
+    let photoName ="";
+
+    const photoInput = document.getElementById("photo");
+    // get file selected with the first one
+    const photoFile = photoInput.files[0];
+
+
+    if (photoFile) {
+        const allowedExtensions = [
+            ".jpeg",
+            ".jpg",
+            ".png"
+        ];
+
+        const fileName = photoFile.name.toLowerCase();
+
+        const isValidExtension = allowedExtensions.some(ext =>
+            fileName.endsWith(ext)
+        );
+
+        if (!isValidExtension) {
+            alert("Seuls les fichiers JPG et PNG sont autorisés.");
+            return;
+        }
+
+        const maxSize = 2 * 1024 * 1024;
+
+        if (photoFile.size > maxSize) {
+            alert("L'image ne doit pas dépasser 2 Mo.");
+            return;
+        }
+
+        photoName = photoFile.name;
+    }
+
     const newRecipe = {
         title: document.getElementById("title").value,
         category_id: document.getElementById("category").value,
         prepareTime: document.getElementById("prepareTime").value,
         cookTime: document.getElementById("cookTime").value,
         portion: document.getElementById("portion").value,
-        photo: document.getElementById("photo").value,
+        photo: photoName,
         description: document.getElementById("description").value,
         ingredients: ingredients
     };
-
-    console.log("ingredients" , ingredients);
-
-    console.log(newRecipe);
 
     if (ingredients.length === 0) {
         alert("Une recette doit contenir au moins un ingrédient.");

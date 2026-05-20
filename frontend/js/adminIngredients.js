@@ -74,7 +74,6 @@ if (btnSearch && searchInput) {
                 return;
             }
             displayIngredients(recipes);
-            console.log(recipes);
         } catch (err) {
             console.error("Erreur lors du chargement des ingrédients", err);
         }

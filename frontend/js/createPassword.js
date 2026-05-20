@@ -38,8 +38,6 @@ if (passwordForm) {
                 })
             });
 
-            console.log("Token reçu :", token);
-
             const data = await response.json();
 
             alert(data.message);

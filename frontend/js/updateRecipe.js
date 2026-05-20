@@ -85,6 +85,8 @@ function hasDuplicateIngredients() {
     return uniqueIds.size !== selectedIds.length;
 }
 
+let currentPhoto = "";
+
 async function loadRecipe() {
     const response = await fetch(`${API_URL}/recipes/${id}`);
     const recipe = await response.json();
@@ -95,13 +97,9 @@ async function loadRecipe() {
     document.getElementById("cookTime").value = recipe.cookTime;
     document.getElementById("portion").value = recipe.portion;
     document.getElementById("description").value = recipe.description;
-    document.getElementById("photo").value = recipe.photo || "";
-
-    console.log("Recette reçue :", recipe);
-    console.log("Ingrédients de la recette :", recipe.ingredients);
+    currentPhoto = recipe.photo || "";
 
     recipe.ingredients.forEach(ingredient => {
-        console.log("Ingrédient chargé :", ingredient);
         addIngredientRow(ingredient);
     });
 }
@@ -121,13 +119,41 @@ form.addEventListener("submit", async (event) => {
         });
     });
 
+    let photoName = currentPhoto;
+
+    const photoInput = document.getElementById("photo");
+    const photoFile = photoInput.files[0];
+
+    if (photoFile) {
+        const allowedExtensions = [".jpg", ".jpeg", ".png"];
+        const fileName = photoFile.name.toLowerCase();
+
+        const isValidExtension = allowedExtensions.some(ext =>
+            fileName.endsWith(ext)
+        );
+
+        if (!isValidExtension) {
+            alert("Seuls les fichiers JPG et PNG sont autorisés.");
+            return;
+        }
+
+        const maxSize = 2 * 1024 * 1024;
+
+        if (photoFile.size > maxSize) {
+            alert("L'image ne doit pas dépasser 2 Mo.");
+            return;
+        }
+
+        photoName = photoFile.name;
+    }
+
     const updateRecipe = {
         title: document.getElementById("title").value,
         category_id: document.getElementById("category").value,
         prepareTime: document.getElementById("prepareTime").value,
         cookTime: document.getElementById("cookTime").value,
         portion: document.getElementById("portion").value,
-        photo: document.getElementById("photo").value,
+        photo: photoName,
         description: document.getElementById("description").value,
         ingredients: ingredients
     };

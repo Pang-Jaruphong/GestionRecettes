@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', async() => {
         document.getElementById('recipePortion').innerText = recipe.portion;
         document.getElementById('recipeDescription').innerText = recipe.description;
         document.getElementById('recipeNote').innerText = recipe.moyNote;
-
-        console.log("photo :", recipe.photo)
         document.getElementById('recipeImage').src = `assets/images/${recipe.photo}`;
 
         const list = document.getElementById('ingredientsList');
@@ -45,7 +43,6 @@ document.addEventListener('DOMContentLoaded', async() => {
                     ${ingredient.unity}
                  </li>`;
         });
-        console.log(recipe);
     } catch (err) {
         console.log("Erreur chargement détail",err);
     }
@@ -98,5 +95,4 @@ confirmAvis.addEventListener("click", async () => {
 
     avisModal.classList.add("hidden");
     location.reload();
-    console.log(recipe.moyNote)
 });

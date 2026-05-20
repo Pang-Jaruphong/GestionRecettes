@@ -144,14 +144,8 @@ authRouter.post('/setupPassword', async (req, res) => {
 authRouter.post('/changePassword', async (req, res) => {
     const { mail,oldPassword, newPassword, confirmNewPassword } = req.body;
 
-    console.log("Tentative de changement pour :", mail);
-    console.log("Body reçu :", req.body);
-
     try {
         const user = await dbAuth.getUserByMail(mail);
-
-        console.log("Recherche mail :", mail);
-        console.log("Résultat BDD :", user);
 
         if (!user) {
             return res.status(404).json({message : 'Données invalide'});
